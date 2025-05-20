@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Nolan + Big Five</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="pagina-inicial" class="pagina">
+            <div class="card text-center">
+                <div class="card-header bg-primary text-white">
+                    <h1>Você tem certeza de que está no lado certo da política?</h1>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">Você pode estar em um lado que não defende as ideias em que você realmente acredita.</h2>
+                    <p class="card-text">Faça o teste! Descubra onde você realmente está no espectro político – e por que isso importa mais do que você imagina.</p>
+                    <p class="card-text"><strong>Acredite:</strong> a maioria das pessoas se surpreende com o resultado.</p>
+                    <button id="btn-iniciar" class="btn btn-primary btn-lg">Quero descobrir meu verdadeiro posicionamento →</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="pagina-cadastro" class="pagina d-none">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Cadastro</h2>
+                </div>
+                <div class="card-body">
+                    <form id="form-cadastro">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome completo</label>
+                            <input type="text" class="form-control" id="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cpf" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="cpf" required>
+                            <div id="cpf-feedback" class="invalid-feedback">
+                                CPF inválido. Por favor, digite um CPF válido.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Gênero</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero" id="genero-masc" value="masculino" required>
+                                <label class="form-check-label" for="genero-masc">Masculino</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero" id="genero-fem" value="feminino">
+                                <label class="form-check-label" for="genero-fem">Feminino</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero" id="genero-outro" value="outro">
+                                <label class="form-check-label" for="genero-outro">Outro</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero" id="genero-nao-informar" value="prefiro não informar">
+                                <label class="form-check-label" for="genero-nao-informar">Prefiro não informar</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="faixa-etaria" class="form-label">Faixa etária</label>
+                            <select class="form-select" id="faixa-etaria" required>
+                                <option value="" selected disabled>Selecione sua faixa etária</option>
+                                <option value="18-24">18-24 anos</option>
+                                <option value="25-34">25-34 anos</option>
+                                <option value="35-44">35-44 anos</option>
+                                <option value="45-59">45-59 anos</option>
+                                <option value="60+">60+ anos</option>
+                            </select>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Continuar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="pagina-questionario" class="pagina d-none">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Questionário</h2>
+                    <div class="progress">
+                        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">1/20</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="pergunta-container">
+                        <!-- As perguntas serão inseridas aqui dinamicamente -->
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button id="btn-anterior" class="btn btn-secondary" disabled>Anterior</button>
+                        <button id="btn-proximo" class="btn btn-primary">Próximo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="pagina-resultado" class="pagina d-none">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Seu Resultado</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <h3 id="resultado-titulo" class="text-center mb-4"></h3>
+                            <div class="canvas-container">
+                                <canvas id="diagrama-nolan"></canvas>
+                            </div>
+                            <div id="resultado-interpretacao" class="mt-4"></div>
+                            <div class="mt-4">
+                                <h4>Partidos brasileiros alinhados:</h4>
+                                <p id="resultado-partidos"></p>
+                                
+                                <h4>Personalidades semelhantes:</h4>
+                                <p id="resultado-personalidades"></p>
+                                
+                                <h4>Países com estrutura compatível:</h4>
+                                <p id="resultado-paises"></p>
+                            </div>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button id="btn-imprimir" class="btn btn-secondary me-2">Imprimir resultado em PDF</button>
+                                <button id="btn-compartilhar" class="btn btn-primary">Compartilhar com amigos</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
