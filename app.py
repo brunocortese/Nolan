@@ -5,7 +5,7 @@ from flask import Flask, send_from_directory, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 # Criar a aplicação Flask
-app = Flask(__name__, static_folder='src/static')
+app = Flask(__name__, static_folder='.src/static')
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
 # Configuração do banco de dados SQLite
